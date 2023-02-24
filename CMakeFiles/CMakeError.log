@@ -1,0 +1,452 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/andrewvog/Code/ARNA_GUI/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_398de/fast && /usr/bin/make  -f CMakeFiles/cmTC_398de.dir/build.make CMakeFiles/cmTC_398de.dir/build
+make[1]: Entering directory '/home/andrewvog/Code/ARNA_GUI/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_398de.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_398de.dir/src.c.o -c /home/andrewvog/Code/ARNA_GUI/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_398de
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_398de.dir/link.txt --verbose=1
+/usr/bin/cc -rdynamic CMakeFiles/cmTC_398de.dir/src.c.o -o cmTC_398de 
+CMakeFiles/cmTC_398de.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_398de.dir/build.make:98: recipe for target 'cmTC_398de' failed
+make[1]: *** [cmTC_398de] Error 1
+make[1]: Leaving directory '/home/andrewvog/Code/ARNA_GUI/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_398de/fast' failed
+make: *** [cmTC_398de/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/andrewvog/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_429bd/fast && /usr/bin/make  -f CMakeFiles/cmTC_429bd.dir/build.make CMakeFiles/cmTC_429bd.dir/build
+make[1]: Entering directory '/home/andrewvog/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_429bd.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_429bd.dir/src.c.o -c /home/andrewvog/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_429bd
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_429bd.dir/link.txt --verbose=1
+/usr/bin/cc -rdynamic CMakeFiles/cmTC_429bd.dir/src.c.o -o cmTC_429bd 
+CMakeFiles/cmTC_429bd.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_429bd.dir/build.make:98: recipe for target 'cmTC_429bd' failed
+make[1]: *** [cmTC_429bd] Error 1
+make[1]: Leaving directory '/home/andrewvog/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_429bd/fast' failed
+make: *** [cmTC_429bd/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --c++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --ec++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --c++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --ec++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --c++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --ec++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --c++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --ec++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+gcc: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags: -c 
+
+The output was:
+1
+gcc: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags: --c++ 
+
+The output was:
+1
+gcc: error: unrecognized command line option ‘--c++’
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags: --ec++ 
+
+The output was:
+1
+gcc: error: unrecognized command line option ‘--ec++’; did you mean ‘-Weffc++’?
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+gcc: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags: -c 
+
+The output was:
+1
+gcc: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags: --c++ 
+
+The output was:
+1
+gcc: error: unrecognized command line option ‘--c++’
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags: --ec++ 
+
+The output was:
+1
+gcc: error: unrecognized command line option ‘--ec++’; did you mean ‘-Weffc++’?
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+gcc: fatal error: no input files
+compilation terminated.
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+gcc: fatal error: no input files
+compilation terminated.
+Determining if the CXX compiler works failed with the following output:
+Change Dir: /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_c7aa7/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c7aa7.dir/build.make CMakeFiles/cmTC_c7aa7.dir/build
+make[1]: Entering directory '/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_c7aa7.dir/testCXXCompiler.cxx.o
+/usr/bin/gcc     -o CMakeFiles/cmTC_c7aa7.dir/testCXXCompiler.cxx.o -c /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+gcc: error trying to exec 'cc1plus': execvp: No such file or directory
+CMakeFiles/cmTC_c7aa7.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_c7aa7.dir/testCXXCompiler.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_c7aa7.dir/testCXXCompiler.cxx.o] Error 1
+make[1]: Leaving directory '/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_c7aa7/fast' failed
+make: *** [cmTC_c7aa7/fast] Error 2
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_41593/fast"
+/usr/bin/make -f CMakeFiles/cmTC_41593.dir/build.make CMakeFiles/cmTC_41593.dir/build
+make[1]: Entering directory '/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_41593.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_41593.dir/CheckSymbolExists.c.o   -c /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_41593
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_41593.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_41593.dir/CheckSymbolExists.c.o  -o cmTC_41593 
+CMakeFiles/cmTC_41593.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_41593.dir/build.make:97: recipe for target 'cmTC_41593' failed
+make[1]: *** [cmTC_41593] Error 1
+make[1]: Leaving directory '/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_41593/fast' failed
+make: *** [cmTC_41593/fast] Error 2
+
+File /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_226d2/fast"
+/usr/bin/make -f CMakeFiles/cmTC_226d2.dir/build.make CMakeFiles/cmTC_226d2.dir/build
+make[1]: Entering directory '/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_226d2.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_226d2.dir/CheckSymbolExists.c.o   -c /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_226d2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_226d2.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_226d2.dir/CheckSymbolExists.c.o  -o cmTC_226d2 
+CMakeFiles/cmTC_226d2.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_226d2.dir/build.make:97: recipe for target 'cmTC_226d2' failed
+make[1]: *** [cmTC_226d2] Error 1
+make[1]: Leaving directory '/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_226d2/fast' failed
+make: *** [cmTC_226d2/fast] Error 2
+
+File /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeScratch/TryCompile-cQ2jd5
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_aabeb/fast && /usr/bin/make  -f CMakeFiles/cmTC_aabeb.dir/build.make CMakeFiles/cmTC_aabeb.dir/build
+make[1]: Entering directory '/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeScratch/TryCompile-cQ2jd5'
+Building C object CMakeFiles/cmTC_aabeb.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_aabeb.dir/src.c.o -c /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeScratch/TryCompile-cQ2jd5/src.c
+Linking C executable cmTC_aabeb
+/snap/cmake/1216/bin/cmake -E cmake_link_script CMakeFiles/cmTC_aabeb.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_aabeb.dir/src.c.o -o cmTC_aabeb 
+CMakeFiles/cmTC_aabeb.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_aabeb.dir/build.make:98: recipe for target 'cmTC_aabeb' failed
+make[1]: *** [cmTC_aabeb] Error 1
+make[1]: Leaving directory '/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/CMakeScratch/TryCompile-cQ2jd5'
+Makefile:127: recipe for target 'cmTC_aabeb/fast' failed
+make: *** [cmTC_aabeb/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+

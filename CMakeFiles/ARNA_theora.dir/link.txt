@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/ARNA_theora.dir/src/ARNA_theora.cpp.o -o ARNA_theora 
