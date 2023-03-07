@@ -1,9 +1,14 @@
 #include "ARNA_theora.hpp"
+#include <cstdint>
 #include <opencv2/core/mat.hpp>
 #include <string>
 
 typedef std::string string;
 typedef nlohmann::json json;
+
+//
+// Globals
+//
 
 //GTK widgets
 GtkWidget *window;
@@ -21,19 +26,23 @@ GtkWidget *connect_button;
 GtkWidget *connect_add_entry;
 GtkWidget *connect_port_entry;
 
+GtkWidget* joystick_button;
+
+//image group vector
 std::vector<image_group> image_groups;
 
-// lazy
+//movement vector
 char move_vec[3] = {0};
 
 //networking
 rosbridge_lib::rosbridge_client *ros;
-int connected = -1;
-
+joystick_listener joystick;
+int connected = rosbridge_lib::listener_status::lstat_disconnected;
 
 //
 // generic image update
 //
+ 
 //updates GtkImage with data from cv::Mat
 void update_img(cv::Mat& mat, GtkWidget* target) {
     if(!mat.empty()){
@@ -45,15 +54,15 @@ void update_img(cv::Mat& mat, GtkWidget* target) {
 //
 // theora image decode
 //
-// TODO optimize this with passing the json as a reference
-// remember to free data in packet
+
+//copies json data toremember to free data in packet
 void theora_json_to_oggpacket(json& j, ogg_packet &ogg)
 {
-    /* TODO look at optimizing this */
+    /* TODO look at optimizing this with buffer to avoid allocations? */
     string s = j["msg"]["data"].dump();
     //std::string_view data = s;
     std::string_view sv = std::string_view(s).substr(1,s.size()-2);
-    std::vector<char> data = rosbridge_lib::base64_decode(sv); /* TODO optimize this, too many copies */
+    std::vector<char> data = rosbridge_lib::base64_decode(sv); /* TODO optimize this, too many copies. rewrite function  to write directly to a buffer*/
     int bytes = sv.size();
 
     ogg.bytes      = bytes;
@@ -163,12 +172,12 @@ int theora_oggpacket_to_cvmat(theora_context& decode, ogg_packet& oggpacket, cv:
     bgr = bgr_padded(cv::Rect(decode.header_info_.pic_x, decode.header_info_.pic_y, decode.header_info_.pic_width, decode.header_info_.pic_height));
 
     //optimize this!!!!
-    //this should deep copy
     swap(target, bgr);
     return 1;
 }
 
-//TODO make this generic, not just theora
+// TODO maybe make this generic with templates, not just theora streams
+
 void theora_image_callback(theora_stream* stream_p, json j) {
     theora_stream& stream_info = *stream_p;
     ogg_packet oggpacket;
@@ -191,7 +200,7 @@ int publish_move_vec() {
     json j;
     j["axes"] = {move_vec[0]*150, move_vec[1]*150, move_vec[2]*150};
     ros->publish("/phy_joy_topic", j);
-    return ros->send_queue();
+    return ros->send_queue() != rosbridge_lib::seret_disconnected;
 }
 
 void press_Button(GtkWidget *widget, gpointer data) {
@@ -216,13 +225,37 @@ void release_Button(GtkWidget *widget, gpointer data) {
 
 
 //
-// ROS
+// ROS spin
 //
 gint spin_ROS(gpointer data) {
-    connected = ros->spin_once();
+    connected = ros->spin_once() != rosbridge_lib::spret_disconnected;
     return 1;
 }
 
+//
+// Joystick poll
+//
+int jhelp(int16_t val) {
+    return (int)val * 200 / INT16_MAX;
+}
+gint poll_joystick(gpointer data) {
+    axis_state axis;
+    joystick.get_axis_state(axis);
+
+    //publish joystick data
+    json j;
+    j["axes"] = {jhelp(axis.axis0), jhelp(axis.axis1), jhelp(axis.axis2)};
+    ros->publish("/phy_joy_topic", j);
+    return ros->send_queue() != rosbridge_lib::seret_disconnected;
+    
+    return 1;
+}
+
+//
+// GUI buttons
+//
+
+// GUI BUTTON - connect to rosbridge server
 gint setup_ROS(gpointer data) {
     
     //parse entries
@@ -236,23 +269,22 @@ gint setup_ROS(gpointer data) {
     //startup rosbridge_client
     ros = new rosbridge_lib::rosbridge_client();
     int result = ros->connect(port, address);
-    if(result < 0) {
+    if(result != rosbridge_lib::conn_return::cnret_succes) {
 	ros->cleanup();
-	connected = -1;
+	connected = 0;
 	std::cout << "failed to connect" << std::endl;
 	return 0;
     }
 
-    connected = 0;
+    connected = 1;
     std::cout << "connected!" << std::endl;
 
    
     //subscribe to video topic
     ros->advertise("/phy_joy_topic", "sensor_msgs/Joy");
-    connected = ros->send_queue() >= 0;
+    connected = ros->send_queue() != rosbridge_lib::send_return::seret_disconnected;
 
     std::cout << "connection status" << connected << std::endl;
-    
     
     //add network read to event loop
     /* TODO do this with a pipe and gtk polling instead of just spinning every 3ms */
@@ -261,6 +293,7 @@ gint setup_ROS(gpointer data) {
     return 1;
 }
 
+//GUI BUTTON - connect stream
 gint connect_stream(GtkWidget* button, gpointer data) {
 
     if(!connected){ return 0; }
@@ -297,18 +330,31 @@ gint connect_stream(GtkWidget* button, gpointer data) {
 
     //subscribe to new topic
     ros->subscribe(new_topic, binded);
-    ros->send_queue();
+    connected = ros->send_queue() != rosbridge_lib::send_return::seret_disconnected;
     return 1;    
+}
+
+//GUI BUTTON - start joystick listener
+gint connect_joystick(gpointer data) {
+    if (joystick.status() == joy_stat_connected){
+	joystick.disconnect();
+    }
+    joystick.connect();
+    g_timeout_add (20, poll_joystick, NULL);
+    return 1;
 }
 
 //
 // GTK setup
 //
+
+//quit application
 void quit_app(GtkWidget *widget, gpointer data) {
     if(connected) {ros->cleanup(); }
     gtk_main_quit();
 }
 
+//setup gtk window
 void setup_gtk(int argc, char** argv) {
 
     //init
@@ -324,6 +370,8 @@ void setup_gtk(int argc, char** argv) {
     gtk_container_add(GTK_CONTAINER(window), layout);
     gtk_widget_show(layout);
 
+
+    //add image groups
     auto register_image_group_helper = [](image_group& ig,string default_topic, int x, int y){
 
 	ig.image = gtk_image_new();
@@ -346,6 +394,7 @@ void setup_gtk(int argc, char** argv) {
     image_groups.emplace_back();
     register_image_group_helper(image_groups[1], "/cam1/image_raw/theora", 1100, 0);
 
+    
     //add connection button and entries
     connect_button = gtk_button_new_with_label("Connect");
     gtk_layout_put(GTK_LAYOUT(layout), connect_button, 700, 50);
@@ -363,6 +412,12 @@ void setup_gtk(int argc, char** argv) {
     gtk_entry_set_text(GTK_ENTRY(connect_port_entry), "9090");
 
 
+    //add joystick button
+    joystick_button = gtk_button_new_with_label("connect joystick");
+    gtk_layout_put(GTK_LAYOUT(layout), joystick_button, 700, 400);
+    gtk_widget_set_size_request(joystick_button, 100,30);
+    g_signal_connect(G_OBJECT(joystick_button), "clicked", G_CALLBACK(connect_joystick), NULL);
+    
 
     //add move buttons + signals
     auto register_move_button_helper = [](GtkWidget*& target, string text, int x, int y) {

@@ -163,6 +163,33 @@ src/ARNA_theora.cpp.s:
 	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.s
 .PHONY : src/ARNA_theora.cpp.s
 
+src/joystick_listener.o: src/joystick_listener.cpp.o
+
+.PHONY : src/joystick_listener.o
+
+# target to build an object file
+src/joystick_listener.cpp.o:
+	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.o
+.PHONY : src/joystick_listener.cpp.o
+
+src/joystick_listener.i: src/joystick_listener.cpp.i
+
+.PHONY : src/joystick_listener.i
+
+# target to preprocess a source file
+src/joystick_listener.cpp.i:
+	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.i
+.PHONY : src/joystick_listener.cpp.i
+
+src/joystick_listener.s: src/joystick_listener.cpp.s
+
+.PHONY : src/joystick_listener.s
+
+# target to generate assembly for a file
+src/joystick_listener.cpp.s:
+	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.s
+.PHONY : src/joystick_listener.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -176,6 +203,9 @@ help:
 	@echo "... src/ARNA_theora.o"
 	@echo "... src/ARNA_theora.i"
 	@echo "... src/ARNA_theora.s"
+	@echo "... src/joystick_listener.o"
+	@echo "... src/joystick_listener.i"
+	@echo "... src/joystick_listener.s"
 .PHONY : help
 
 

@@ -1,4 +1,5 @@
 #include "rosbridge_client.hpp"
+#include "joystick_listener.hpp"
 
 #include <ogg/ogg.h>
 #include <opencv2/core/mat.hpp>

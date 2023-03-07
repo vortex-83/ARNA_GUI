@@ -41,7 +41,7 @@ add_definitions(${GTK_CFLAGS_OTHER}
 )
 
 #add executable
-add_executable(ARNA_GUI src/ARNA_theora.cpp)
+add_executable(ARNA_GUI src/ARNA_theora.cpp src/joystick_listener.cpp)
 
 #Link libraries
 target_link_libraries(ARNA_GUI

@@ -110,6 +110,10 @@ CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o: /usr/local/include/opencv4/opencv
 CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o: /usr/local/include/opencv4/opencv2/video/tracking.hpp
 CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o: /usr/local/include/opencv4/opencv2/videoio.hpp
 CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o: inc/ARNA_theora.hpp
+CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o: inc/joystick_listener.hpp
 CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o: lib/rosbridge_lib/inc/json.hpp
 CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o: lib/rosbridge_lib/inc/rosbridge_client.hpp
+
+CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.o: src/joystick_listener.cpp
+CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.o: inc/joystick_listener.hpp
 

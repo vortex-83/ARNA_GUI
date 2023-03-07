@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/vogel/Code/LARRI/ARNA_GUI/src/ARNA_theora.cpp" "/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o"
+  "/home/vogel/Code/LARRI/ARNA_GUI/src/joystick_listener.cpp" "/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

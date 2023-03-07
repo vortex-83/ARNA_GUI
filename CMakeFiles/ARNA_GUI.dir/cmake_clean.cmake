@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o"
+  "CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.o"
   "ARNA_GUI.pdb"
   "ARNA_GUI"
 )
