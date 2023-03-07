@@ -112,6 +112,7 @@ namespace rosbridge_lib{
 	int recv_buffer_size = -1;
 
 	//ROS vectors
+	/* switch this into a map */
 	std::vector<std::tuple<std::string, std::function<void(nlohmann::json&)>>> subscribed_topics;
 	std::vector<std::string> advertised_topics;
 

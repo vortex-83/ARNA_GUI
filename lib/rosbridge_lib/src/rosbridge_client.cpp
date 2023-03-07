@@ -104,7 +104,6 @@ void* start_listener_thread(void* args) {
 	    listener_shutdown();
 	}	
     }
-    
 }
 
 
@@ -290,7 +289,7 @@ int rosbridge_lib::rosbridge_client::unsubscribe(string topic){
 }
 
 // send all queued messages in out_message_queue
-/* TODO maybe make this multithreaded */
+/* TODO maybe make this asynchronous */
 int rosbridge_lib::rosbridge_client::send_queue(){
     int32_t status = listener_status.load();
     if(status == rosbridge_lib::listener_status::lstat_disconnected){
@@ -319,7 +318,7 @@ int rosbridge_lib::rosbridge_client::send_queue(){
     return rosbridge_lib::send_return::seret_sent;
 }
 
-//invoke a subscribed topics function
+// invoke a subscribed topics function
 int rosbridge_lib::rosbridge_client::handle_msg(string topic, json &j){
     auto topic_match = [&topic](std::tuple<string, std::function<void(json&)>> i){ return topic == std::get<0>(i);};
     auto found = std::find_if(subscribed_topics.begin(), subscribed_topics.end(), topic_match);
@@ -331,14 +330,15 @@ int rosbridge_lib::rosbridge_client::handle_msg(string topic, json &j){
 }
 
 // handle queued messages
+/* Handle failed handle_msg calls */
 int rosbridge_lib::rosbridge_client::spin_once() {
     int32_t status = listener_status.load();
     if(status == rosbridge_lib::listener_status::lstat_disconnected){
 	return rosbridge_lib::spin_return::spret_disconnected;
 	cleanup();
     }
-    else if(status == rosbridge_lib::spin_return::spret_not_spun){
-	return 0;
+    else if(status == rosbridge_lib::listener_status::lstat_starting){
+	return rosbridge_lib::spin_return::spret_not_spun;
     }
 
     std::list<nlohmann::json> tmp_queue;

@@ -1,6 +1,5 @@
 #include "joystick_listener.hpp"
 
-
 void* joystick_listener_thread(void* args) {
     listener_args l_args = *(listener_args*)args;
     free(args);
@@ -35,7 +34,7 @@ void* joystick_listener_thread(void* args) {
 }
 
 joystick_listener::joystick_listener() {
-    connected.store(0);
+    connected.store(joy_stat_disconnected);
     axis[0].store(0);
     axis[1].store(0);
     axis[2].store(0);
