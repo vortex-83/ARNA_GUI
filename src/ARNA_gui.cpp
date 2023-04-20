@@ -55,31 +55,33 @@ void update_img(cv::Mat& mat, GtkWidget* target) {
 //copies json data toremember to free data in packet
 void theora_json_to_oggpacket(json& j, ogg_packet &ogg)
 {
-    /* TODO look at optimizing this with buffer to avoid allocations? */
+    /* TODO-low look at optimizing this with buffer to avoid allocations? dump json data into char[], not create new string*/
     string s = j["msg"]["data"].dump();
-    //std::string_view data = s;
     std::string_view sv = std::string_view(s).substr(1,s.size()-2);
-    std::vector<char> data = rosbridge_lib::base64_decode(sv); /* TODO optimize this, too many copies. rewrite function  to write directly to a buffer*/
+    std::vector<char> data = rosbridge_lib::base64_decode(sv); /* TODO optimize this, too many copies. rewrite function to write directly to a buffer, not create new vector*/
     int bytes = sv.size();
 
+    //fill ogg packet
     ogg.bytes      = bytes;
     ogg.b_o_s      = j["msg"]["b_o_s"];
     ogg.e_o_s      = j["msg"]["e_o_s"];
     ogg.granulepos = j["msg"]["granulepos"];
     ogg.packetno   = j["msg"]["packetno"];
-    ogg.packet = new unsigned char[ogg.bytes]; //caller responsible for freeing this
+    //WARNING!!!! caller responsible for freeing this, you will get a memory leak if you dont free this
+    //TODO-low make this a smart pointer?
+    ogg.packet = new unsigned char[ogg.bytes];
     memcpy(ogg.packet, data.data(), ogg.bytes);
 }
 
 //copies decoded contents of oggpacket to target, returns 1 if new frame, 0 if no new frame, -1 if error
 int theora_oggpacket_to_cvmat(theora_context& decode, ogg_packet& oggpacket, cv::Mat& target)
 {
-    // Beginning of logical stream flag means we're getting new headers
+    // beginning of logical stream flag means we're getting new headers
     if (oggpacket.b_o_s == 1) {
 	decode.reset();
     }
 
-    // Decode header packets until we get the first video packet
+    // decode header packets until we get the first video packet
     if (decode.received_header_ == false) {
 	int rval = th_decode_headerin(&decode.header_info_, &decode.header_comment_, &decode.setup_info_, &oggpacket);
 	switch (rval) {
@@ -87,28 +89,28 @@ int theora_oggpacket_to_cvmat(theora_context& decode, ogg_packet& oggpacket, cv:
 	    // We've received the full header; this is the first video packet.
 	    decode.decoding_context_ = th_decode_alloc(&decode.header_info_, decode.setup_info_);
 	    if (!decode.decoding_context_) {
-		//std::cout <<  "[theora] Decoding parameters were invalid" << std::endl;
+		//decoding parameters were invalid
 		return -1;
 	    }
 	    decode.received_header_ = true;
 	    decode.update_pp_level();
 	    break; // Continue on the video decoding
 	case TH_EFAULT:
-	    //RCLCPP_WARN(logger_, "[theora] EFAULT when processing header packet");
+	    //EFAULT when processing header packet
 	    return -1;
 	case TH_EBADHEADER:
-	    //RCLCPP_WARN(logger_, "[theora] Bad header packet");
+	    //bad header packet
 	    return -1;
 	case TH_EVERSION:
-	    //RCLCPP_WARN(logger_, "[theora] Header packet not decodable with this version of libtheora");
+	    //header packet not decodable with this version of libtheora
 	    return -1;
 	case TH_ENOTFORMAT:
-	    //RCLCPP_WARN(logger_, "[theora] Packet was not a Theora header");
+	    //packet was not a Theora header"
 	    return -1;
 	default:
-	    // If rval > 0, we successfully received a header packet.
+	    //if rval > 0, we received a header packet (but not all of them)
 	    if (rval < 0)
-		//RCLCPP_WARN(logger_, "[theora] Error code %d when processing header packet", rval);
+		//error code when processing header packet
 		return -1;
 	}
     }
@@ -123,26 +125,23 @@ int theora_oggpacket_to_cvmat(theora_context& decode, ogg_packet& oggpacket, cv:
     case 0:
 	break;
     case TH_DUPFRAME:
-	//RCLCPP_DEBUG(logger_, "[theora] Got a duplicate frame");
-	//if (!mat_img.empty()) {
-	//    show_mat_img(); //TODO stop using show_mat_img
-	//}
+	//duplicate frame
 	return 0;
     case TH_EFAULT:
-	//RCLCPP_WARN(logger_, "[theora] EFAULT processing video packet");
+	//EFAULT processing video packet
 	return -1;
     case TH_EBADPACKET:
-	//std::cout <<  "[theora] Packet does not contain encoded video data") << std::endl;
+	//packet does not contain encoded video data
 	return -1;
     case TH_EIMPL:
-	//RCLCPP_WARN(logger_, "[theora] The video data uses bitstream features not supported by this version of libtheora");
+	//video data uses bitstream features not supported by this version of libtheora
 	return -1;
     default:
-	//RCLCPP_WARN(logger_, "[theora] Error code %d when decoding video packet", rval);
+	//error code when decoding video packet
 	return -1;
     }
 
-    /* TODO optimize this!!!!! */
+    /* TODO-low optimize this, works for now but could be better */
     //decode new frame
     th_ycbcr_buffer ycbcr_buffer;
     th_decode_ycbcr_out(decode.decoding_context_, ycbcr_buffer);
@@ -168,19 +167,23 @@ int theora_oggpacket_to_cvmat(theora_context& decode, ogg_packet& oggpacket, cv:
     // Pull out original (non-padded) image region
     bgr = bgr_padded(cv::Rect(decode.header_info_.pic_x, decode.header_info_.pic_y, decode.header_info_.pic_width, decode.header_info_.pic_height));
 
-    //optimize this!!!!
+    //this is pretty fast but it probably could be better
     swap(target, bgr);
     return 1;
 }
 
-// TODO maybe make this generic with templates, not just theora streams
-
+// TODO-low maybe make this generic with templates, not just theora streams
 void theora_image_callback(theora_stream* stream_p, json j) {
     theora_stream& stream_info = *stream_p;
     ogg_packet oggpacket;
-    
+
+    //fill ogg packet
     theora_json_to_oggpacket(j, oggpacket);
+
+    //decode data and copy it to cvmat associated with a stream
     int new_frame = theora_oggpacket_to_cvmat(stream_info.decode_function_context, oggpacket, stream_info.buffer);
+
+    //if new frame update the gui
     if(new_frame == 1){
 	update_img(stream_info.buffer, stream_info.target);
     }
@@ -192,6 +195,8 @@ void theora_image_callback(theora_stream* stream_p, json j) {
 //
 // movement
 //
+
+//sends move vector to remote
 int publish_move_vec() {
     //publish joystick data
     json j;
@@ -200,6 +205,7 @@ int publish_move_vec() {
     return ros->send_queue() != rosbridge_lib::seret_disconnected;
 }
 
+//handles button press
 void press_Button(GtkWidget *widget, gpointer data) {
     if (widget == left_button){ move_vec[0] = -1; }
     else if(widget == right_button){ move_vec[0] = 1; }
@@ -212,6 +218,7 @@ void press_Button(GtkWidget *widget, gpointer data) {
     connected = publish_move_vec();
 }
 
+//handle button release
 void release_Button(GtkWidget *widget, gpointer data) {
     move_vec[0] = 0;
     move_vec[1] = 0;
@@ -219,7 +226,6 @@ void release_Button(GtkWidget *widget, gpointer data) {
 
     connected = publish_move_vec();
 }
-
 
 //
 // ROS spin
@@ -295,13 +301,14 @@ gint connect_stream(GtkWidget* button, gpointer data) {
 
     if(!connected){ return 0; }
 
+    /* TODO-high this entire setup is terrible and unsafe and bad, fix this */
     image_group* ig = nullptr;
     for( int i = 0; i < image_groups.size(); i++){
 	if(image_groups[i].button == button){
 	    ig = &image_groups[i];
 	}
     }
-    if (ig == nullptr){return 0;}
+    if (ig == nullptr){return 0;} //no image group for this button
     
     string new_topic = string((char*)gtk_entry_get_text(GTK_ENTRY(ig->entry))); //get topic from entry
 
@@ -321,6 +328,7 @@ gint connect_stream(GtkWidget* button, gpointer data) {
     ig->topic = new_topic;
     
     //bind new callback
+    //I hate this, maybe use a std::map and integer identifier instead of just the RAW pointer?
     std::function<void(json&)> binded = [stream_pointer = ig->stream_](json& j){
 	theora_image_callback(stream_pointer, j);
     };
