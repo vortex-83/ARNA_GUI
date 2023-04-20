@@ -97,6 +97,43 @@ clean: CMakeFiles/ARNA_GUI.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/ARNA_arm_GUI.dir
+
+# All Build rule for target.
+CMakeFiles/ARNA_arm_GUI.dir/all: lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/all
+	$(MAKE) -f CMakeFiles/ARNA_arm_GUI.dir/build.make CMakeFiles/ARNA_arm_GUI.dir/depend
+	$(MAKE) -f CMakeFiles/ARNA_arm_GUI.dir/build.make CMakeFiles/ARNA_arm_GUI.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles --progress-num=4,5 "Built target ARNA_arm_GUI"
+.PHONY : CMakeFiles/ARNA_arm_GUI.dir/all
+
+# Include target in all.
+all: CMakeFiles/ARNA_arm_GUI.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/ARNA_arm_GUI.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ARNA_arm_GUI.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles 0
+.PHONY : CMakeFiles/ARNA_arm_GUI.dir/rule
+
+# Convenience name for target.
+ARNA_arm_GUI: CMakeFiles/ARNA_arm_GUI.dir/rule
+
+.PHONY : ARNA_arm_GUI
+
+# clean rule for target.
+CMakeFiles/ARNA_arm_GUI.dir/clean:
+	$(MAKE) -f CMakeFiles/ARNA_arm_GUI.dir/build.make CMakeFiles/ARNA_arm_GUI.dir/clean
+.PHONY : CMakeFiles/ARNA_arm_GUI.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/ARNA_arm_GUI.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Directory level rules for directory lib/rosbridge_lib
 
 # Convenience name for "all" pass in the directory.
@@ -121,7 +158,7 @@ lib/rosbridge_lib/preinstall:
 lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/all:
 	$(MAKE) -f lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/build.make lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/depend
 	$(MAKE) -f lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/build.make lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles --progress-num=4,5 "Built target rosbridge_lib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles --progress-num=6,7 "Built target rosbridge_lib"
 .PHONY : lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/all
 
 # Include target in all.

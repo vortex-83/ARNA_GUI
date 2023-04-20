@@ -16,6 +16,8 @@
 
 #include <string_view>
 #include <vector>
+#include <cstdint>
+#include <string>
 
 
 //ripped from github

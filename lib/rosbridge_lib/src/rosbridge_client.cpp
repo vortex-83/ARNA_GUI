@@ -107,7 +107,13 @@ void* start_listener_thread(void* args) {
 }
 
 
-rosbridge_lib::rosbridge_client::rosbridge_client(){}
+rosbridge_lib::rosbridge_client::rosbridge_client() {
+    listener_status.store(rosbridge_lib::listener_status::lstat_disconnected);
+    socket_fd = -1;
+    listener_pipe_fd[0] = -1;
+    recv_buffer = 0;
+    send_buffer = 0;
+}
 
 rosbridge_lib::rosbridge_client::~rosbridge_client(){cleanup();}
 
@@ -161,7 +167,6 @@ int rosbridge_lib::rosbridge_client::connect(int port_arg, string address_arg) {
 
     socket_fd = socket(AF_INET, SOCK_STREAM, 0);
     if(socket_fd < 0){
-	std::cout << "failure to create socket" << std::endl;
 	return rosbridge_lib::conn_return::cnret_no_socket;
     }
 
@@ -173,7 +178,6 @@ int rosbridge_lib::rosbridge_client::connect(int port_arg, string address_arg) {
     
     int sys_result = getaddrinfo(address.c_str(), std::to_string(port).c_str(), &hints, &dns_result);
     if (sys_result < 0) {
-	std::cout << "DNS lookup failure" << std::endl;
 	return rosbridge_lib::conn_return::cnret_no_dns;
     }
 
@@ -181,14 +185,12 @@ int rosbridge_lib::rosbridge_client::connect(int port_arg, string address_arg) {
     /* TODO make this have a timeout */
     sys_result = ::connect(socket_fd, dns_result->ai_addr, dns_result->ai_addrlen);
     if (sys_result < 0) {
-	std::cout << "connection fauilure" << std::endl;
 	return rosbridge_lib::conn_return::cnret_no_conn;
     }
 
     //create pipe
     sys_result = pipe(listener_pipe_fd);
     if (sys_result < 0){
-	std::cout << "failed to create pipe" << std::endl;
 	return rosbridge_lib::conn_return::cnret_no_pipe;
     }
     

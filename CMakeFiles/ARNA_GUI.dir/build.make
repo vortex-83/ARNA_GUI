@@ -57,28 +57,28 @@ include CMakeFiles/ARNA_GUI.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ARNA_GUI.dir/flags.make
 
-CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o: CMakeFiles/ARNA_GUI.dir/flags.make
-CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o: src/ARNA_theora.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o -c /home/vogel/Code/LARRI/ARNA_GUI/src/ARNA_theora.cpp
+CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o: CMakeFiles/ARNA_GUI.dir/flags.make
+CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o: src/ARNA_gui.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vogel/Code/LARRI/ARNA_GUI/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o -c /home/vogel/Code/LARRI/ARNA_GUI/src/ARNA_gui.cpp
 
-CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vogel/Code/LARRI/ARNA_GUI/src/ARNA_theora.cpp > CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.i
+CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vogel/Code/LARRI/ARNA_GUI/src/ARNA_gui.cpp > CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.i
 
-CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vogel/Code/LARRI/ARNA_GUI/src/ARNA_theora.cpp -o CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.s
+CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vogel/Code/LARRI/ARNA_GUI/src/ARNA_gui.cpp -o CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.s
 
-CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o.requires:
+CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o.requires:
 
-.PHONY : CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o.requires
+.PHONY : CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o.requires
 
-CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o.provides: CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o.requires
-	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o.provides.build
-.PHONY : CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o.provides
+CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o.provides: CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o.provides.build
+.PHONY : CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o.provides
 
-CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o.provides.build: CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o
+CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o.provides.build: CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o
 
 
 CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.o: CMakeFiles/ARNA_GUI.dir/flags.make
@@ -107,13 +107,13 @@ CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.o.provides.build: CMakeFiles/A
 
 # Object files for target ARNA_GUI
 ARNA_GUI_OBJECTS = \
-"CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o" \
+"CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o" \
 "CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.o"
 
 # External object files for target ARNA_GUI
 ARNA_GUI_EXTERNAL_OBJECTS =
 
-ARNA_GUI: CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o
+ARNA_GUI: CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o
 ARNA_GUI: CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.o
 ARNA_GUI: CMakeFiles/ARNA_GUI.dir/build.make
 ARNA_GUI: lib/rosbridge_lib/librosbridge_lib.so
@@ -141,7 +141,7 @@ CMakeFiles/ARNA_GUI.dir/build: ARNA_GUI
 
 .PHONY : CMakeFiles/ARNA_GUI.dir/build
 
-CMakeFiles/ARNA_GUI.dir/requires: CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o.requires
+CMakeFiles/ARNA_GUI.dir/requires: CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o.requires
 CMakeFiles/ARNA_GUI.dir/requires: CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.o.requires
 
 .PHONY : CMakeFiles/ARNA_GUI.dir/requires

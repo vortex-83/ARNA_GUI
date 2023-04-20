@@ -124,6 +124,19 @@ ARNA_GUI/fast:
 .PHONY : ARNA_GUI/fast
 
 #=============================================================================
+# Target rules for targets named ARNA_arm_GUI
+
+# Build rule for target.
+ARNA_arm_GUI: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ARNA_arm_GUI
+.PHONY : ARNA_arm_GUI
+
+# fast build rule for target.
+ARNA_arm_GUI/fast:
+	$(MAKE) -f CMakeFiles/ARNA_arm_GUI.dir/build.make CMakeFiles/ARNA_arm_GUI.dir/build
+.PHONY : ARNA_arm_GUI/fast
+
+#=============================================================================
 # Target rules for targets named rosbridge_lib
 
 # Build rule for target.
@@ -136,32 +149,59 @@ rosbridge_lib/fast:
 	$(MAKE) -f lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/build.make lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/build
 .PHONY : rosbridge_lib/fast
 
-src/ARNA_theora.o: src/ARNA_theora.cpp.o
+src/ANRA_arm_gui.o: src/ANRA_arm_gui.cpp.o
 
-.PHONY : src/ARNA_theora.o
+.PHONY : src/ANRA_arm_gui.o
 
 # target to build an object file
-src/ARNA_theora.cpp.o:
-	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.o
-.PHONY : src/ARNA_theora.cpp.o
+src/ANRA_arm_gui.cpp.o:
+	$(MAKE) -f CMakeFiles/ARNA_arm_GUI.dir/build.make CMakeFiles/ARNA_arm_GUI.dir/src/ANRA_arm_gui.cpp.o
+.PHONY : src/ANRA_arm_gui.cpp.o
 
-src/ARNA_theora.i: src/ARNA_theora.cpp.i
+src/ANRA_arm_gui.i: src/ANRA_arm_gui.cpp.i
 
-.PHONY : src/ARNA_theora.i
+.PHONY : src/ANRA_arm_gui.i
 
 # target to preprocess a source file
-src/ARNA_theora.cpp.i:
-	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.i
-.PHONY : src/ARNA_theora.cpp.i
+src/ANRA_arm_gui.cpp.i:
+	$(MAKE) -f CMakeFiles/ARNA_arm_GUI.dir/build.make CMakeFiles/ARNA_arm_GUI.dir/src/ANRA_arm_gui.cpp.i
+.PHONY : src/ANRA_arm_gui.cpp.i
 
-src/ARNA_theora.s: src/ARNA_theora.cpp.s
+src/ANRA_arm_gui.s: src/ANRA_arm_gui.cpp.s
 
-.PHONY : src/ARNA_theora.s
+.PHONY : src/ANRA_arm_gui.s
 
 # target to generate assembly for a file
-src/ARNA_theora.cpp.s:
-	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/ARNA_theora.cpp.s
-.PHONY : src/ARNA_theora.cpp.s
+src/ANRA_arm_gui.cpp.s:
+	$(MAKE) -f CMakeFiles/ARNA_arm_GUI.dir/build.make CMakeFiles/ARNA_arm_GUI.dir/src/ANRA_arm_gui.cpp.s
+.PHONY : src/ANRA_arm_gui.cpp.s
+
+src/ARNA_gui.o: src/ARNA_gui.cpp.o
+
+.PHONY : src/ARNA_gui.o
+
+# target to build an object file
+src/ARNA_gui.cpp.o:
+	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o
+.PHONY : src/ARNA_gui.cpp.o
+
+src/ARNA_gui.i: src/ARNA_gui.cpp.i
+
+.PHONY : src/ARNA_gui.i
+
+# target to preprocess a source file
+src/ARNA_gui.cpp.i:
+	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.i
+.PHONY : src/ARNA_gui.cpp.i
+
+src/ARNA_gui.s: src/ARNA_gui.cpp.s
+
+.PHONY : src/ARNA_gui.s
+
+# target to generate assembly for a file
+src/ARNA_gui.cpp.s:
+	$(MAKE) -f CMakeFiles/ARNA_GUI.dir/build.make CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.s
+.PHONY : src/ARNA_gui.cpp.s
 
 src/joystick_listener.o: src/joystick_listener.cpp.o
 
@@ -197,12 +237,16 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... ARNA_GUI"
 	@echo "... edit_cache"
+	@echo "... ARNA_GUI"
+	@echo "... ARNA_arm_GUI"
 	@echo "... rosbridge_lib"
-	@echo "... src/ARNA_theora.o"
-	@echo "... src/ARNA_theora.i"
-	@echo "... src/ARNA_theora.s"
+	@echo "... src/ANRA_arm_gui.o"
+	@echo "... src/ANRA_arm_gui.i"
+	@echo "... src/ANRA_arm_gui.s"
+	@echo "... src/ARNA_gui.o"
+	@echo "... src/ARNA_gui.i"
+	@echo "... src/ARNA_gui.s"
 	@echo "... src/joystick_listener.o"
 	@echo "... src/joystick_listener.i"
 	@echo "... src/joystick_listener.s"

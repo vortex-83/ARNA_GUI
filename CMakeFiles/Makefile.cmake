@@ -56,5 +56,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/ARNA_GUI.dir/DependInfo.cmake"
+  "CMakeFiles/ARNA_arm_GUI.dir/DependInfo.cmake"
   "lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/DependInfo.cmake"
   )

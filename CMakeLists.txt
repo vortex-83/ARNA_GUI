@@ -40,10 +40,8 @@ add_definitions(${GTK_CFLAGS_OTHER}
 		${PC_THEORADEC_CFLAGS_OTHER}
 )
 
-#add executable
-add_executable(ARNA_GUI src/ARNA_theora.cpp src/joystick_listener.cpp)
-
-#Link libraries
+#add executables and link libraries
+add_executable(ARNA_GUI src/ARNA_gui.cpp src/joystick_listener.cpp)
 target_link_libraries(ARNA_GUI
 		      ${GTK_LIBRARIES}
 		      rosbridge_lib
@@ -53,4 +51,11 @@ target_link_libraries(ARNA_GUI
  		      ${PC_THEORA_LIBRARIES}
  		      ${PC_THEORAENC_LIBRARIES}	
   		      ${PC_THEORADEC_LIBRARIES}
+)
+
+add_executable(ARNA_arm_GUI src/ANRA_arm_gui.cpp)
+target_link_libraries(ARNA_arm_GUI
+		      ${GTK_LIBRARIES}
+		      rosbridge_lib
+		      Threads::Threads
 )	

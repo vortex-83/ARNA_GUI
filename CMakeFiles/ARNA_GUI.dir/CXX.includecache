@@ -6,15 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/vogel/Code/LARRI/ARNA_GUI/src/ARNA_theora.cpp
+/home/vogel/Code/LARRI/ARNA_GUI/src/ARNA_gui.cpp
 ARNA_theora.hpp
 /home/vogel/Code/LARRI/ARNA_GUI/src/ARNA_theora.hpp
-cstdint
--
-opencv2/core/mat.hpp
--
-string
--
 
 /home/vogel/Code/LARRI/ARNA_GUI/src/joystick_listener.cpp
 joystick_listener.hpp
@@ -1096,6 +1090,10 @@ gdkmm-3.0/gdkmm.h
 string_view
 -
 vector
+-
+cstdint
+-
+string
 -
 
 inc/joystick_listener.hpp
