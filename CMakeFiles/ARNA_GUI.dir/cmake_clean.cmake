@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
+  "ARNA_GUI"
+  "ARNA_GUI.pdb"
   "CMakeFiles/ARNA_GUI.dir/src/ARNA_gui.cpp.o"
   "CMakeFiles/ARNA_GUI.dir/src/joystick_listener.cpp.o"
-  "ARNA_GUI.pdb"
-  "ARNA_GUI"
 )
 
 # Per-language clean rules from dependency scanning.

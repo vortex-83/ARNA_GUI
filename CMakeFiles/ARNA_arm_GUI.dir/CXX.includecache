@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/vogel/Code/LARRI/ARNA_GUI/src/ANRA_arm_gui.cpp
+/home/vortex83/LARRI/ARNA_GUI/src/ARNA_arm_gui.cpp
 cstdlib
 -
 gtkmm-3.0/gtkmm.h
 -
 json.hpp
-/home/vogel/Code/LARRI/ARNA_GUI/src/json.hpp
+/home/vortex83/LARRI/ARNA_GUI/src/json.hpp
 rosbridge_client.hpp
-/home/vogel/Code/LARRI/ARNA_GUI/src/rosbridge_client.hpp
+/home/vortex83/LARRI/ARNA_GUI/src/rosbridge_client.hpp
 
 lib/rosbridge_lib/inc/json.hpp
 algorithm

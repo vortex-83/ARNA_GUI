@@ -41,18 +41,20 @@ int connected = 0;
 
 //publish move vecs
 gint publish_move_vec(gpointer data) {
-
     json j;
     json twist;
+
     twist["linear_x"] = linear_move[0];
     twist["linear_y"] = linear_move[1];
     twist["linear_z"] = linear_move[2];
     twist["angular_x"] = 0;
     twist["angular_y"] = 0;
     twist["angular_z"] = 0;
+
     // j["data"] = {, linear_move[1], linear_move[2],
     //	 angular_move[0], angular_move[1], angular_move[2]};
     j["twist"] = twist;
+
     ros.publish(move_vec_topic, j);
 
     return ros.send_queue() != rosbridge_lib::seret_disconnected;
@@ -65,19 +67,22 @@ gint setup_ROS(gpointer data) {
     char* port_str = (char*)gtk_entry_get_text(GTK_ENTRY(connect_entry[1]));
     char* p;
     int port = strtol ( port_str, &p, 10);
-    if (*p != 0) {std::cout << "invalid port" << std::endl;}
+
+    if (*p != 0) {
+        std::cout << "invalid port" << std::endl;
+    }
 
     string address = string((char*)gtk_entry_get_text(GTK_ENTRY(connect_entry[0])));
 
-    
     //connect rosbridge_client
     int result = ros.connect(port, address);
 
-    if(result != rosbridge_lib::conn_return::cnret_succes) {
-	ros.cleanup();
-	connected = 0;
-	std::cout << "failed to connect" << std::endl;
-	return 0;
+    if (result != rosbridge_lib::conn_return::cnret_succes) {
+    	ros.cleanup();
+    	connected = 0;
+    	std::cout << "failed to connect" << std::endl;
+
+    	return 0;
     }
     
     connected = 1;
@@ -95,41 +100,42 @@ gint setup_ROS(gpointer data) {
 
 //find index of button in list
 int find_index(std::vector<GtkWidget*> arr, GtkWidget* widget) {
-    
     int idx = -1;
+
     for(int i = 0; i < arr.size(); i++){
-	if(arr[i] == widget){
-	    idx = i;
-	    break;
-	}
+    	if (arr[i] == widget) {
+    	    idx = i;
+    	    break;
+    	}
     }
+
     return idx;
 }
 
 //GTK callback - respond to move button pressed
 void press_Button(GtkWidget *widget, gpointer data) {
-
     int idx = -1;
     
     //find index of button in linear buttons
     idx = find_index(linear_buttons, widget);
-    if(idx != -1){
-	linear_move[linear_buttondIDX_to_vecIDX[idx]] = linear_buttondIDX_to_vecCOEF[idx];
-	return;
+
+    if (idx != -1) {
+    	linear_move[linear_buttondIDX_to_vecIDX[idx]] = linear_buttondIDX_to_vecCOEF[idx];
+    	return;
     }
 
     idx = find_index(angular_buttons, widget);
-    if(idx != -1){
-	angular_move[angular_buttondIDX_to_vecIDX[idx]] = angular_buttondIDX_to_vecCOEF[idx];
-	return;
-    }
 
-    if(idx != -1){ /* error? */}
+    if (idx != -1) {
+    	angular_move[angular_buttondIDX_to_vecIDX[idx]] = angular_buttondIDX_to_vecCOEF[idx];
+    	return;
+    } else {
+        // TODO-low handle error (button not found)
+    }
 }
 
 //GTK callback - reset all buttons
 void release_Button(GtkWidget *widget, gpointer data) {
-
     linear_move[0] = 0;
     linear_move[1] = 0;
     linear_move[2] = 0;
@@ -141,10 +147,12 @@ void release_Button(GtkWidget *widget, gpointer data) {
 
 //GTK callback - quit application
 void quit_app(GtkWidget *widget, gpointer data) {
-    if(connected){
-	ros.cleanup();
+    if (connected) {
+	   ros.cleanup();
     }
+
     gtk_main_quit();
+
     //exit(EXIT_SUCCESS);
 }
 
@@ -162,12 +170,12 @@ void setup_gtk() {
     gtk_widget_show(layout);
 
     //register move buttons
-    auto register_move_button_helper = [](GtkWidget*& target, string text, int x, int y) {
-	target = gtk_button_new_with_label(text.c_str());
-	gtk_layout_put(GTK_LAYOUT(layout), target, x, y);
-	gtk_widget_set_size_request(target, 80, 35);
-	g_signal_connect(G_OBJECT(target), "pressed", G_CALLBACK(press_Button), NULL);
-	g_signal_connect(G_OBJECT(target), "released", G_CALLBACK(release_Button), NULL);
+    auto register_move_button_helper = [] (GtkWidget*& target, string text, int x, int y) {
+    	target = gtk_button_new_with_label(text.c_str());
+    	gtk_layout_put(GTK_LAYOUT(layout), target, x, y);
+    	gtk_widget_set_size_request(target, 80, 35);
+    	g_signal_connect(G_OBJECT(target), "pressed", G_CALLBACK(press_Button), NULL);
+    	g_signal_connect(G_OBJECT(target), "released", G_CALLBACK(release_Button), NULL);
     };
 
     register_move_button_helper(linear_buttons[0], "up", 200, 250);

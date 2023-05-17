@@ -1,5 +1,9 @@
 #include "rosbridge_client.hpp"
-#include "joystick_listener.hpp"
+
+#include <opencv2/core/mat.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/opencv.hpp>
 
 #include <ogg/ogg.h>
 #include <opencv2/core/mat.hpp>
@@ -19,6 +23,7 @@
 #include <cstdint>
 #include <string>
 
+#include "joystick_listener.hpp"
 
 //ripped from github
 class theora_context {

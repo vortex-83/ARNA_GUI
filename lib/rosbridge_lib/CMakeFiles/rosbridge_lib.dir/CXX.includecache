@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/vogel/Code/LARRI/ARNA_GUI/lib/rosbridge_lib/src/rosbridge_client.cpp
+/home/vortex83/LARRI/ARNA_GUI/lib/rosbridge_lib/src/rosbridge_client.cpp
 rosbridge_client.hpp
-/home/vogel/Code/LARRI/ARNA_GUI/lib/rosbridge_lib/src/rosbridge_client.hpp
+/home/vortex83/LARRI/ARNA_GUI/lib/rosbridge_lib/src/rosbridge_client.hpp
 
 lib/rosbridge_lib/inc/json.hpp
 algorithm

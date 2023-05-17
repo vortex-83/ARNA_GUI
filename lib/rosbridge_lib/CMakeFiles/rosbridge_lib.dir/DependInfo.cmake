@@ -4,9 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/vogel/Code/LARRI/ARNA_GUI/lib/rosbridge_lib/src/rosbridge_client.cpp" "/home/vogel/Code/LARRI/ARNA_GUI/lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/src/rosbridge_client.cpp.o"
+  "/home/vortex83/LARRI/ARNA_GUI/lib/rosbridge_lib/src/rosbridge_client.cpp" "/home/vortex83/LARRI/ARNA_GUI/lib/rosbridge_lib/CMakeFiles/rosbridge_lib.dir/src/rosbridge_client.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
+
+# Preprocessor definitions for this target.
+set(CMAKE_TARGET_DEFINITIONS_CXX
+  "rosbridge_lib_EXPORTS"
+  )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

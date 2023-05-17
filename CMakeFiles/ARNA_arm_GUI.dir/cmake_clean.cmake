@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ARNA_arm_GUI.dir/src/ANRA_arm_gui.cpp.o"
-  "ARNA_arm_GUI.pdb"
   "ARNA_arm_GUI"
+  "ARNA_arm_GUI.pdb"
+  "CMakeFiles/ARNA_arm_GUI.dir/src/ARNA_arm_gui.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

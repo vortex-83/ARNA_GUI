@@ -1,1 +1,1 @@
-/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,librosbridge_lib.so -o librosbridge_lib.so CMakeFiles/rosbridge_lib.dir/src/rosbridge_client.cpp.o 
+/usr/bin/c++ -fPIC   -shared -Wl,-soname,librosbridge_lib.so -o librosbridge_lib.so CMakeFiles/rosbridge_lib.dir/src/rosbridge_client.cpp.o 

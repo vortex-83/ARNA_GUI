@@ -53,7 +53,7 @@ target_link_libraries(ARNA_GUI
   		      ${PC_THEORADEC_LIBRARIES}
 )
 
-add_executable(ARNA_arm_GUI src/ANRA_arm_gui.cpp)
+add_executable(ARNA_arm_GUI src/ARNA_arm_gui.cpp)
 target_link_libraries(ARNA_arm_GUI
 		      ${GTK_LIBRARIES}
 		      rosbridge_lib
